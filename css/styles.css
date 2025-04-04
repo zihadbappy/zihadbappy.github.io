@@ -114,24 +114,27 @@ section {
 
 .primary-btn {
     background-color: var(--terminal-green);
-    color: var(--primary-bg);
+    color: var(--card-bg);
+    border: 2px outset var(--terminal-green);
 }
 
 .primary-btn:hover {
     background-color: #3d9140;
-    color: var(--primary-bg);
+    color: var(--hover-bg);
     transform: translateY(-2px);
 }
 
 .secondary-btn {
     background-color: transparent;
-    color: var(--terminal-green);
-    border: 2px solid var(--terminal-green);
+    color: var(--text-primary);
+    border: 5px outset var(--terminal-green);
+    /* border-bottom-color: rgb(101, 174, 101);
+    border-right-color: rgb(91, 146, 91); */
 }
 
 .secondary-btn:hover {
-    background-color: rgba(76, 175, 80, 0.1);
-    color: var(--terminal-green);
+    background-color: var(--terminal-green);
+    color: var(--hover-bg);
     transform: translateY(-2px);
 }
 
@@ -230,10 +233,21 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 10% 20%, rgba(50, 108, 229, 0.1) 0%, rgba(13, 17, 23, 0) 50%),
-                radial-gradient(circle at 90% 80%, rgba(76, 175, 80, 0.1) 0%, rgba(13, 17, 23, 0) 50%);
+    
+    /* Multiple backgrounds: Gradient layers + Semi-transparent background image */
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(50, 108, 229, 0.2) 0%, rgba(13, 17, 23, 0) 50%),
+        radial-gradient(circle at 90% 80%, rgba(76, 175, 80, 0.2) 0%, rgba(13, 17, 23, 0) 50%),
+        url('../images/bg-green.jpg');
+
+    background-size: cover;  /* Ensure the image covers the section */
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* Lower opacity of the entire pseudo-element */
+    
     z-index: 1;
 }
+
 
 .hero-content {
     position: relative;

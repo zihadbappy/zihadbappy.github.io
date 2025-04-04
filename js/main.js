@@ -3,16 +3,16 @@
  * Theme: Backend/DevOps Engineer
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Mobile Navigation Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    
+
     if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function () {
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-            
+
             // Toggle menu icon animation
             const bars = document.querySelectorAll('.bar');
             if (menuToggle.classList.contains('active')) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Close mobile menu when clicking on a nav link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -36,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
+
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop - 70,
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.boxShadow = 'none';
         }
     });
-    
+
     // Terminal typing effect simulation
     function simulateTyping() {
         const commands = [
@@ -77,9 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'terraform apply',
             'git push origin main'
         ];
-        
+
         const outputs = [
-            'Anower Zihad',
+            'Anower H. Zihad',
             'AWS | Docker | Kubernetes | Terraform | Ansible | CI/CD | Python | JavaScript',
             'urban-bangla  webrtc-vidchat  bengali-fake-news-detection',
             'CONTAINER ID   IMAGE                  STATUS          PORTS',
@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
             'Apply complete! Resources: 12 added, 5 changed, 2 destroyed.',
             'Everything up-to-date'
         ];
-        
+
         let currentIndex = 0;
         const terminalBody = document.querySelector('.terminal-body');
-        
+
         function updateTerminal() {
             // Clear previous command and output except the first one
             const lines = terminalBody.querySelectorAll('.line');
@@ -99,45 +99,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     lines[i].remove();
                 }
             }
-            
+
             // Add new command
             const commandLine = document.createElement('div');
             commandLine.className = 'line';
             commandLine.innerHTML = `<span class="prompt">$</span> <span class="command">${commands[currentIndex]}</span>`;
             terminalBody.appendChild(commandLine);
-            
+
             // Add output after a short delay
             setTimeout(() => {
                 const outputLine = document.createElement('div');
                 outputLine.className = 'line';
                 outputLine.innerHTML = `<span class="output">${outputs[currentIndex]}</span>`;
                 terminalBody.appendChild(outputLine);
-                
+
                 // Add prompt line
                 const promptLine = document.createElement('div');
                 promptLine.className = 'line';
                 promptLine.innerHTML = `<span class="prompt">$</span> <span class="cursor"></span>`;
                 terminalBody.appendChild(promptLine);
-                
-                // Move to next command
 
+                // Move to next command
                 currentIndex = (currentIndex + 1) % commands.length;
             }, 500);
         }
-        
+
         // Initial update
         updateTerminal();
-        
-        // Update terminal every 5 seconds
+
+        // Update terminal every 3 seconds
         setInterval(updateTerminal, 3000);
     }
-    
-    simulateTyping();
 
+    simulateTyping();
 
     // Skill animation on scroll
     const skillCategories = document.querySelectorAll('.skill-category');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -146,56 +143,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     skillCategories.forEach(category => {
         category.style.opacity = 0;
         category.style.transform = 'translateY(20px)';
         category.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(category);
     });
-    
-    // Project card animation on scroll
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach(card => {
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(card);
-    });
-    
-    // Timeline animation on scroll
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    timelineItems.forEach(item => {
-        item.style.opacity = 0;
-        item.style.transform = 'translateX(-20px)';
-        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(item);
-    });
 
-
-document.addEventListener('DOMContentLoaded', function() {
     // Initialize EmailJS
     emailjs.init("8ixomQhHl_J5j-fLH"); // Replace with YOUR_PUBLIC_KEY
 
+    // Contact Form Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
             // Collect form data
-            const formData = new FormData(contactForm);
             const formValues = {
-                name: formData.get("name"),
-                email: formData.get("email"),
-                subject: formData.get("subject"),
-                message: formData.get("message")
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
             };
 
             // Send email using EmailJS
             emailjs.send("service_pwxjohm", "template_i3vwuvk", formValues)
-                .then(function(response) {
+                .then(function (response) {
                     console.log("Email sent successfully!", response);
 
                     // Show success message
@@ -218,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         successMessage.remove();
                     }, 5000);
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error("Email sending failed!", error);
 
                     // Show error message
@@ -226,5 +201,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
-});
 });

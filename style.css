@@ -558,14 +558,33 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
 
 @media (max-width: 960px) {
   .outline-shell { display: block; padding: 26px clamp(20px, 3.5vw, 32px) 0; }
-  .outline-shell > aside { position: static; }
+  /* Centered aside for mobile/tablet */
+  .outline-shell > aside { position: static; text-align: center; } 
   .outline-shell > article { border-left: 0; padding-left: 0; }
 
   .monogram { font-size: 1.75rem; }
-  .outline-name { margin-bottom: 18px; }
+  /* Ensure the logo wrapper respects the centering */
+  .outline-name { margin-bottom: 18px; display: inline-block; }
 
-  .outline-shell nav { display: flex; flex-wrap: wrap; gap: 6px 20px; border-left: 0; }
-  .outline-shell nav a { padding: 2px 0; border-left: 0; margin-left: 0; }
+  /* Centered, single-row navigation */
+  .outline-shell nav { 
+    display: flex; 
+    flex-wrap: nowrap; /* Force a single row */
+    justify-content: center; /* Center the navigation items */
+    gap: 16px; /* Adjust gap to fit elements safely */
+    border-left: 0; 
+    overflow-x: auto; /* Allows horizontal scrolling on extremely small screens */
+    scrollbar-width: none; /* Hides scrollbar for clean UI */
+    -webkit-overflow-scrolling: touch;
+  }
+  .outline-shell nav::-webkit-scrollbar { display: none; }
+  
+  .outline-shell nav a { 
+    padding: 2px 0; 
+    border-left: 0; 
+    margin-left: 0; 
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
+  }
   .outline-shell nav a.active { box-shadow: 0 2px 0 var(--accent); }
 
   .outline-shell aside .resumes { display: none; }
@@ -593,11 +612,15 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   .projects .record-heading { grid-template-columns: 1fr; }
   .projects .record-heading > .tags { text-align: left; }
 
-  #section-contact > .socials { margin-left: 0; }
+  #section-contact > .socials { margin-left: 0; justify-content: center; } /* Center socials */
   .skill-grid > article { grid-template-columns: 1fr; gap: 2px; }
 }
 
 @media (max-width: 540px) {
+  /* Slightly scale down nav gap and text size on very small phones to guarantee 1-row fit */
+  .outline-shell nav { gap: 10px; }
+  .outline-shell nav a { font-size: 0.85rem; }
+
   .outline-shell article > header .resumes { grid-template-columns: 1fr; }
   .record-heading { grid-template-columns: minmax(0, 1fr); }
   .record-date, .grade, .papers .record-heading > .meta { text-align: left; }

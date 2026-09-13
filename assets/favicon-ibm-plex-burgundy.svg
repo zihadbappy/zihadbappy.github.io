@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>H. — IBM Plex Sans</title>
-  <!-- IBM Plex Sans SemiBold glyph outlines, SIL Open Font License 1.1. -->
-  <circle cx="32" cy="32" r="32" fill="#fafaf9"/>
-  <g fill="#800020">
-    <g transform="rotate(90 28 29)"><path transform="translate(8.943410 47.500000) scale(0.053009 -0.053009)" d="M505 0V295H214V0H82V698H214V411H505V698H637V0Z"/></g>
-    <path transform="translate(44.678788 48.033333) scale(0.042424 -0.042424)" d="M149 -11Q109 -11 89.0 10.0Q69 31 69 62V80Q69 112 89.0 133.0Q109 154 149 154Q191 154 210.0 133.0Q229 112 229 80V62Q229 31 210.0 10.0Q191 -11 149 -11Z"/>
-  </g>
-</svg>

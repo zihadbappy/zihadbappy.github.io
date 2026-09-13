@@ -167,20 +167,24 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
   color: var(--ink-strong);
 }
 .monogram .monogram-h {
+  /* Rotated 90deg: the glyph's on-screen width comes from this box's HEIGHT,
+     and its on-screen height from the box's WIDTH. Size both explicitly and
+     rotate about the centre so the stretched glyph can't overrun its box. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 50%;
-  transform: rotate(90deg) scaleY(1.2);
-  width: 1.3em; /* Increased width to prevent clipping on the right */
-  text-align: center;
+  width: 1em;
+  height: 1.45em;   /* becomes the glyph's visual width after rotation */
   line-height: 1;
-  margin: 0 0.1em; /* Increased margin on both sides of the H */
+  transform: rotate(90deg) scaleY(1.2);
+  transform-origin: 50% 50%;
+  margin: 0 -0.12em; /* pull the wide box back in; gap is handled by .monogram */
   color: var(--secondary-ink);
-  vertical-align: middle;
 }
-.monogram-dot { color: var(--secondary-ink); }
+.monogram-dot { color: var(--accent-ink); }
 .name-accent  { color: var(--secondary-ink); }
+.name-accent-dot { color: var(--accent-ink); }
 
 .outline-shell nav {
   display: grid;
@@ -569,6 +573,13 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
     font-size: 1.75rem; 
     display: inline-flex;
     align-items: center;
+  }
+  /* The rotated box is taller than its siblings, so flex centring alone
+     leaves the glyph looking high; align on the glyph, not the box. */
+  .monogram .monogram-h {
+    align-self: center;
+    height: 1.45em;
+    line-height: 1.45em;
   }
   /* Ensure the logo wrapper respects the centering and vertical alignment */
   .outline-name { margin-bottom: 18px; display: inline-block; vertical-align: middle; }

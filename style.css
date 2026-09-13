@@ -339,7 +339,7 @@ a:hover .brand-icon { opacity: 1; }
 .bio { margin-bottom: 12px; color: var(--ink); }
 .bio > span { display: block; margin-bottom: 3px; }
 
-.header-email { margin: 16px 0 0; }
+.header-email { margin: 16px 0 10px; }
 .email { font-size: var(--text-body); color: var(--ink); font-family: var(--serif); }
 .intro > p { font-size: var(--text-body); }
 .email > .icon { color: var(--accent-ink); }

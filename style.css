@@ -101,7 +101,7 @@ h3 {
   font-size: var(--text-detail);
   line-height: 1.45;
   color: var(--black);
-  letter-spacing: .01em;
+  letter-spacing: .02sem;
 }
 
 .institution { font-weight: 600; color: var(--ink); font-size: 0.9375rem; }

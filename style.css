@@ -159,6 +159,7 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
 .monogram {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
   gap: 0.015em;
   font-size: 2.125rem;
   font-weight: 600;
@@ -612,7 +613,14 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   .projects .record-heading { grid-template-columns: 1fr; }
   .projects .record-heading > .tags { text-align: left; }
 
-  #section-contact > .socials { margin-left: 0; justify-content: center; } /* Center socials */
+  /* Stack social links vertically one by one line and keep them left-aligned */
+  #section-contact > .socials { 
+    margin-left: 0; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 8px; 
+  }
+  
   .skill-grid > article { grid-template-columns: 1fr; gap: 2px; }
 }
 

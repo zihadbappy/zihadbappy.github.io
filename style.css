@@ -159,7 +159,6 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
 .monogram {
   display: inline-flex;
   align-items: center;
-  vertical-align: middle;
   gap: 0.015em;
   font-size: 2.125rem;
   font-weight: 600;
@@ -168,7 +167,9 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
   color: var(--ink-strong);
 }
 .monogram .monogram-h {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 50%;
   transform: rotate(90deg) scaleY(1.2);
   width: 0.85em;
@@ -176,6 +177,7 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
   line-height: 1;
   margin: 0 0.035em;
   color: var(--secondary-ink);
+  vertical-align: middle;
 }
 .monogram-dot { color: var(--secondary-ink); }
 .name-accent  { color: var(--secondary-ink); }
@@ -563,9 +565,13 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   .outline-shell > aside { position: static; text-align: center; } 
   .outline-shell > article { border-left: 0; padding-left: 0; }
 
-  .monogram { font-size: 1.75rem; }
-  /* Ensure the logo wrapper respects the centering */
-  .outline-name { margin-bottom: 18px; display: inline-block; }
+  .monogram { 
+    font-size: 1.75rem; 
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Ensure the logo wrapper respects the centering and vertical alignment */
+  .outline-name { margin-bottom: 18px; display: inline-block; vertical-align: middle; }
 
   /* Centered, single-row navigation */
   .outline-shell nav { 
@@ -605,7 +611,7 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   ol.news > li { grid-template-columns: 1.6rem minmax(0, 1fr); gap: 0 10px; }
   .news-date { grid-column: 2; text-align: left; margin-top: 3px; }
 
-  .record-heading { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; }
+  .record-heading {grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; }
   .record-date, .grade { white-space: normal; }
   .papers .record-heading { grid-template-columns: minmax(0, 1fr); }
   .papers .record-heading > .meta { text-align: right; margin-top: 2px; }

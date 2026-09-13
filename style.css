@@ -159,11 +159,11 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
 .monogram {
   display: inline-flex;
   align-items: center;
-  gap: 0.015em;
+  gap: 0.08em; /* Increased overall gap between letters */
   font-size: 2.125rem;
   font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.015em; /* Loosened letter spacing slightly */
   color: var(--ink-strong);
 }
 .monogram .monogram-h {
@@ -172,10 +172,10 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
   justify-content: center;
   font-size: 50%;
   transform: rotate(90deg) scaleY(1.2);
-  width: 0.85em;
+  width: 1.3em; /* Increased width to prevent clipping on the right */
   text-align: center;
   line-height: 1;
-  margin: 0 0.035em;
+  margin: 0 0.1em; /* Increased margin on both sides of the H */
   color: var(--secondary-ink);
   vertical-align: middle;
 }

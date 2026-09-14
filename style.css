@@ -167,29 +167,35 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
   color: var(--ink-strong);
 }
 .monogram .monogram-h {
-  /* Rotated 90deg: the glyph's on-screen width comes from this box's HEIGHT,
-     and its on-screen height from the box's WIDTH. The box is sized to the
-     STRETCHED glyph (height x scaleY) so nothing can overrun it, and it is
-     flex-centred in the row rather than sitting on the text baseline. */
+  /* A 90deg-rotated H. Transforms do NOT affect layout: this box keeps its
+     declared width x height slot in the flex row no matter how it is turned,
+     so the two axes have to be reasoned about separately. On screen the
+     glyph's width comes from its cap-height x scaleY (~0.84em here) and its
+     height from the H's advance width (~0.71em); the box below covers both.
+
+     inline-flex with centring on BOTH axes is load-bearing: it puts the glyph
+     at the box's centre independently of the text baseline. inline-block would
+     sit it on the baseline instead, which drifts with font-size and drops the
+     H toward the bottom at small sizes. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   align-self: center;
   flex: none;
   font-size: 50%;
-  width: 1em;
-  height: 1.74em;   /* 1.45em glyph x scaleY(1.2); becomes the visual width */
+  width: 1.1em;     /* >= the stretched glyph's on-screen width */
+  height: 1em;      /* on-screen height = the H's advance width */
   line-height: 1;
-  /* A capital H spans baseline -> cap-height, leaving the font's descender
-     space empty below it, so the glyph sits above its box centre. Once
-     rotated that shows up as an off-centre gap, so nudge the glyph onto the
-     box centre FIRST (translateY is pre-rotation, i.e. the horizontal axis
-     on screen after the 90deg turn). ~0.069em from IBM Plex cap metrics. */
+  /* scaleY stretches along the pre-rotation vertical axis, which is the
+     HORIZONTAL axis on screen after the turn -- this is what widens the H.
+     The H's ink spans baseline -> cap-height, leaving the font's descender
+     space empty below it, so the ink sits ~0.069em above its em-box centre
+     (IBM Plex: cap 698/1000, desc 220/1000). Un-rotated that is invisible;
+     rotated it becomes a sideways shift that slides the H under the Z, so
+     re-centre the ink FIRST -- translateY is pre-rotation, i.e. horizontal
+     on screen after the turn. */
   transform: rotate(90deg) scaleY(1.2) translateY(0.069em);
   transform-origin: 50% 50%;
-  /* The box is 1.74em tall but only ~1em wide once rotated, so trim the dead
-     side space. Kept smaller than the overflow so the glyph is never clipped. */
-  margin: 0 -0.07em;
   color: var(--secondary-ink);
 }
 .monogram-dot { color: var(--accent-ink); }
@@ -579,13 +585,9 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   .outline-shell > aside { position: static; text-align: center; } 
   .outline-shell > article { border-left: 0; padding-left: 0; }
 
-  .monogram { 
-    font-size: 1.75rem; 
-    display: inline-flex;
-    align-items: center;
-  }
-  /* Inherits the box sizing and centring from the base rule; nothing to
-     restate here -- the em-based box scales with .monogram's font-size. */
+  /* Only the size changes; the em-based box and the centring are inherited
+     from the base rule and must NOT be restated here. */
+  .monogram { font-size: 1.75rem; }
   /* Ensure the logo wrapper respects the centering and vertical alignment */
   .outline-name { margin-bottom: 18px; display: inline-block; vertical-align: middle; }
 

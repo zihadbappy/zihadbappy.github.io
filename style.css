@@ -168,23 +168,28 @@ body::after { content: ""; display: block; height: clamp(180px, 40svh, 400px); }
 }
 .monogram .monogram-h {
   /* Rotated 90deg: the glyph's on-screen width comes from this box's HEIGHT,
-     and its on-screen height from the box's WIDTH. Size both explicitly and
-     rotate about the centre so the stretched glyph can't overrun its box. */
+     and its on-screen height from the box's WIDTH. The box is sized to the
+     STRETCHED glyph (height x scaleY) so nothing can overrun it, and it is
+     flex-centred in the row rather than sitting on the text baseline. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  flex: none;
   font-size: 50%;
   width: 1em;
-  height: 1.45em;   /* becomes the glyph's visual width after rotation */
+  height: 1.74em;   /* 1.45em glyph x scaleY(1.2); becomes the visual width */
   line-height: 1;
   /* A capital H spans baseline -> cap-height, leaving the font's descender
      space empty below it, so the glyph sits above its box centre. Once
      rotated that shows up as an off-centre gap, so nudge the glyph onto the
-     box centre FIRST (translateY is pre-rotation, i.e. the vertical axis
+     box centre FIRST (translateY is pre-rotation, i.e. the horizontal axis
      on screen after the 90deg turn). ~0.069em from IBM Plex cap metrics. */
   transform: rotate(90deg) scaleY(1.2) translateY(0.069em);
   transform-origin: 50% 50%;
-  margin: 0 -0.12em; /* pull the wide box back in; gap is handled by .monogram */
+  /* The box is 1.74em tall but only ~1em wide once rotated, so trim the dead
+     side space. Kept smaller than the overflow so the glyph is never clipped. */
+  margin: 0 -0.07em;
   color: var(--secondary-ink);
 }
 .monogram-dot { color: var(--accent-ink); }
@@ -579,12 +584,8 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
     display: inline-flex;
     align-items: center;
   }
-  /* Inherits the centring transform from the base rule; only the box needs
-     restating at this font size. */
-  .monogram .monogram-h {
-    align-self: center;
-    height: 1.45em;
-  }
+  /* Inherits the box sizing and centring from the base rule; nothing to
+     restate here -- the em-based box scales with .monogram's font-size. */
   /* Ensure the logo wrapper respects the centering and vertical alignment */
   .outline-name { margin-bottom: 18px; display: inline-block; vertical-align: middle; }
 

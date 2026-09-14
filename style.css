@@ -588,8 +588,11 @@ ol.projects > li:last-child > article { padding-bottom: 0; border-bottom: 0; }
   /* Only the size changes; the em-based box and the centring are inherited
      from the base rule and must NOT be restated here. */
   .monogram { font-size: 1.75rem; }
-  /* Ensure the logo wrapper respects the centering and vertical alignment */
-  .outline-name { margin-bottom: 18px; display: inline-block; vertical-align: middle; }
+  /* .outline-name and .monogram are the SAME element (<a class="outline-name
+     monogram">), and this rule comes after .monogram in the file -- so setting
+     display here overrides the flex container and drops the rotated H onto the
+     text baseline. Only the spacing may be changed here. */
+  .outline-name { margin-bottom: 18px; }
 
   /* Centered, single-row navigation */
   .outline-shell nav { 
